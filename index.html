@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Для тебя ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #ffd6e8, #fff);
+    overflow-x: hidden;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+}
+
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #ff8fb1;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #ff5f95;
+}
+
+.hidden {
+    display: none;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.event {
+    background: white;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: 0.6s;
+}
+
+.event img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 ЭКРАН ПАРОЛЯ -->
+<div class="center" id="lockScreen">
+    <h1>Жүрегімнің иесіне 💌</h1>
+    <p>Пароль (Біз үшін ерекше күн)</p>
+    <input type="password" id="passwordInput" placeholder="Пароль">
+    <button onclick="checkPassword()">Открыть</button>
+    <p id="hint" style="color:red;"></p>
+</div>
+
+<!-- 💖 ОСНОВНОЙ САЙТ -->
+<div id="mainContent" class="hidden">
+
+    <div class="center">
+        <h1>Танысқанымызға 1 жыл ❤️</h1>
+        <p>Менімен бірге болғаныңа рахмет</p>
+    </div>
+
+    <div class="timeline">
+        <h2 style="text-align:center;">Біздің хикая</h2>
+
+        <!-- 🌸 СОБЫТИЕ 1 -->
+        <div class="event">
+            <h3>15.02.2025</h3> <!-- ✏️ НАПИШИ ДАТУ -->
+            <p>Ең алғашқы кездесу</p> <!-- ✏️ НАПИШИ ОПИСАНИЕ -->
+            <p>Ең алғашқы бірге тамашалаған фильм</p>
+            <img src="Рэкетир3.jpg" alt=""> <!-- 📸 ВСТАВЬ НАЗВАНИЕ ФОТО -->
+            <p>Ең алғашқы бірге тамақтанған жер</p>
+            <img src="Додо.jpg" alt="">
+
+        </div>
+
+        <!-- 🌸 СОБЫТИЕ 2 -->
+        <div class="event">
+            <h3>22.02.2025</h3>
+            <p>Саған ғашық болған күн</p>
+            <img src="Медеу.jpeg" alt="">
+            <p>Медеуден кейінгі кешкі ас</p>
+            <img src="Мен.jpeg" alt="">
+        </div>
+
+        <div class="event">
+            <h3>11.03.2025</h3>
+            <p>Ең алғашқы гүл</p>
+            <img src="Гүл.jpeg" alt="">
+        </div>
+
+        <div class="event">
+            <h3>18.03.2025</h3>
+            <img src="Чуча.jpeg" alt="">
+            <p>Алғаш рет қол ұстасыыып :)</p>
+        </div>
+
+        <!-- 🌸 СОБЫТИЕ 5 -->
+        <div class="event">
+            <h3>06.04.2025</h3>
+            <p>Ең бақытты күн</p>
+            <img src="Счастье.jpeg" alt="">
+        </div>
+
+    </div>
+
+    <div class="center">
+        <h2>Я люблю тебя ❤️</h2>
+    </div>
+
+</div>
+
+<!-- 🎵 МУЗЫКА -->
+<audio id="bgMusic" loop>
+    <!-- 🎵 ВСТАВЬ НАЗВАНИЕ MP3 ФАЙЛА -->
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-control hidden" id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<script>
+
+// 🔑 НАПИШИ СВОЙ ПАРОЛЬ ЗДЕСЬ
+const correctPassword = "1234";  // ✏️ ИЗМЕНИ ЭТО
+
+function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    if(input === correctPassword){
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("mainContent").classList.remove("hidden");
+        document.getElementById("musicBtn").classList.remove("hidden");
+        document.getElementById("bgMusic").play();
+    } else {
+        document.getElementById("hint").innerText = "Подсказка: дата, которая изменила всё 💕";
+    }
+}
+
+function toggleMusic(){
+    const music = document.getElementById("bgMusic");
+    if(music.paused){
+        music.play();
+    } else {
+        music.pause();
+    }
+}
+
+// ✨ АНИМАЦИЯ ПРИ СКРОЛЛЕ
+const events = document.querySelectorAll('.event');
+window.addEventListener('scroll', () => {
+    events.forEach(event => {
+        const position = event.getBoundingClientRect().top;
+        if(position < window.innerHeight - 100){
+            event.classList.add('show');
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>
